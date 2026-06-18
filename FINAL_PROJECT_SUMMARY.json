@@ -1,0 +1,65 @@
+{
+  "project": "TXGNN-StaR: Stability-Aware GNN Framework with Reliability-Quantified Toxicophore Discovery",
+  "base_model": {
+    "architecture": "5-layer, 8-head Graph Attention Network (GAT)",
+    "total_parameters": 1079820,
+    "dataset": "Tox21 (7,823 valid molecules after cleaning)",
+    "split": "Bemis-Murcko scaffold split (80/10/10)",
+    "test_mean_roc_auc": 0.7770538817872169,
+    "test_mean_pr_auc": 0.35171426719073645,
+    "best_epoch": 43
+  },
+  "pbes_module": {
+    "description": "Perturbation-Based Explanation Stability - measures consistency of GNNExplainer attributions across K=10 graph-isomorphic molecular variants via Spearman correlation",
+    "n_molecules_evaluated": 100,
+    "mean_acs": 0.8008368711183267,
+    "std_acs": 0.1367417516560177,
+    "min_acs": 0.18476190476190477,
+    "max_acs": 0.9484711779448621,
+    "pct_high_stability_acs_geq_0.7": 86.0
+  },
+  "sss_component": {
+    "description": "Structural Sparsity Score - Gini coefficient of atom attribution distribution",
+    "mean_sss": 0.10013495499635253,
+    "std_sss": 0.02458337816104243
+  },
+  "tas_component": {
+    "description": "Toxicophore Agreement Score - overlap between top-important atoms and known structural alerts (Kazius et al. 2005, ToxAlerts-consistent SMARTS patterns)",
+    "n_alerts_used": 30,
+    "molecules_with_known_alert": "36/100",
+    "mean_tas_where_defined": 0.11442901234567901
+  },
+  "eri_metric": {
+    "formula": "ERI(G) = alpha*ACS(G) + beta*SSS(G) + gamma*TAS(G), re-normalized when TAS undefined",
+    "weights": {
+      "alpha": 0.5,
+      "beta": 0.2,
+      "gamma": 0.3
+    },
+    "mean_eri": 0.6465802149884154,
+    "std_eri": 0.15896997125585802
+  },
+  "rgrt_decision_layer": {
+    "trust_threshold": 0.7,
+    "caveat_threshold": 0.4,
+    "tier_distribution": {
+      "Trust": 43,
+      "Caveat": 53,
+      "Mandatory Review": 4
+    }
+  },
+  "correlation_findings": {
+    "eri_vs_tas_pearson": 0.5149596796442828,
+    "eri_vs_tas_pvalue": 0.0013105536804399944,
+    "acs_vs_tas_pearson_independent_check": 0.012833786446687149,
+    "acs_vs_tas_pvalue": 0.9407811371784133,
+    "key_finding": "ACS and TAS show near-zero independent correlation (r=0.013, p=0.94), indicating explanation STABILITY and CHEMICAL VALIDITY are distinct, complementary reliability dimensions - supporting the need for a multi-component ERI."
+  },
+  "clintox_cross_validation": {
+    "n_molecules": 40,
+    "mean_acs_clintox": 0.8003369206075,
+    "mean_acs_tox21": 0.8008368711183267,
+    "mann_whitney_p_value": 0.3385035970911555,
+    "conclusion": "No statistically significant difference between Tox21 and ClinTox ACS distributions (p=0.34), demonstrating PBES generalizes robustly across datasets."
+  }
+}
