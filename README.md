@@ -58,19 +58,19 @@ TXGNN-StaR addresses both problems with three components built on top of a stand
 
 **GAT Training Curves**
 
-![Training Curves](results/training_curves.png)
+![Training Curves](training_curves.png)
 
 **Explanation Stability (ACS) Distribution — 100 Tox21 Molecules**
 
-![PBES Distribution](results/pbes_distribution.png)
+![PBES Distribution](pbes_distribution.png)
 
 **ERI Distribution, RGRT Tiers, and Component Correlations**
 
-![ERI and RGRT Summary](results/eri_rgrt_summary.png)
+![ERI and RGRT Summary](eri_rgrt_summary.png)
 
 **Cross-Dataset Validation — Tox21 vs ClinTox**
 
-![ClinTox Cross Validation](results/clintox_cross_validation.png)
+![ClinTox Cross Validation](clintox_cross_validation.png)
 
 ---
 
@@ -82,18 +82,13 @@ TXGNN-StaR/
 ├── requirements.txt
 ├── LICENSE
 ├── .gitignore
-├── notebooks/
-│   └── __notebook_source__.ipynb     # Full pipeline: data -> GAT -> PBES -> ERI -> RGRT -> validation
-├── results/
-│   ├── FINAL_PROJECT_SUMMARY.json    # Consolidated metrics across all components
-│   ├── training_curves.png           # GAT training loss / validation AUC curves
-│   ├── pbes_distribution.png         # ACS distribution across 100 Tox21 molecules
-│   ├── eri_rgrt_summary.png          # ERI distribution, RGRT tiers, correlation heatmap
-│   └── clintox_cross_validation.png  # Tox21 vs ClinTox ACS comparison
-├── models/
-│   └── best_gat_model.pt             # Trained GAT checkpoint (see Note below on large files)
-└── docs/
-    └── proposal.pdf                  # Original research fellowship proposal
+├── __notebook_source__.ipynb     # Full pipeline: data -> GAT -> PBES -> ERI -> RGRT -> validation
+├── best_gat_model.pt             # Trained GAT checkpoint (see Note below on large files)
+├── FINAL_PROJECT_SUMMARY.json    # Consolidated metrics across all components
+├── training_curves.png           # GAT training loss / validation AUC curves
+├── pbes_distribution.png         # ACS distribution across 100 Tox21 molecules
+├── eri_rgrt_summary.png          # ERI distribution, RGRT tiers, correlation heatmap
+└── clintox_cross_validation.png  # Tox21 vs ClinTox ACS comparison
 ```
 
 ---
@@ -114,7 +109,7 @@ TXGNN-StaR/
 
 This project was developed and tested on Kaggle with a T4 GPU. To reproduce:
 
-1. Open `notebooks/__notebook_source__.ipynb` in a GPU-enabled environment (Kaggle, Colab, or local CUDA machine).
+1. Open `__notebook_source__.ipynb` in a GPU-enabled environment (Kaggle, Colab, or local CUDA machine).
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run cells sequentially. The notebook downloads Tox21 and ClinTox automatically from the DeepChem S3 bucket.
 4. Total runtime: GAT training ~10-15 min; full PBES+SSS+TAS batch over 100 molecules ~1 hour (GNNExplainer optimization is the main bottleneck — each molecule requires 10 separate explainer runs for PBES).
