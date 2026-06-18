@@ -54,6 +54,24 @@ TXGNN-StaR addresses both problems with three components built on top of a stand
 
 > **Generalization finding** — PBES produces statistically indistinguishable stability distributions on Tox21 (in-domain) and ClinTox (cross-dataset), suggesting the metric is not a dataset-specific artifact.
 
+### Visual Results
+
+**GAT Training Curves**
+
+![Training Curves](results/training_curves.png)
+
+**Explanation Stability (ACS) Distribution — 100 Tox21 Molecules**
+
+![PBES Distribution](results/pbes_distribution.png)
+
+**ERI Distribution, RGRT Tiers, and Component Correlations**
+
+![ERI and RGRT Summary](results/eri_rgrt_summary.png)
+
+**Cross-Dataset Validation — Tox21 vs ClinTox**
+
+![ClinTox Cross Validation](results/clintox_cross_validation.png)
+
 ---
 
 ## Repository Structure
